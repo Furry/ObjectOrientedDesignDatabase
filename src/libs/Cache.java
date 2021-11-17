@@ -27,4 +27,24 @@ public class Cache {
             return null;
         }
     }
+
+    public void set(String key, String value) {
+        if (size == MAX_SIZE) {
+            String oldestKey = null;
+            int oldestCount = 0;
+            for (String key1 : referenceCounter.keySet()) {
+                int count = referenceCounter.get(key1);
+                if (count > oldestCount) {
+                    oldestKey = key1;
+                    oldestCount = count;
+                }
+            }
+            cache.remove(oldestKey);
+            referenceCounter.remove(oldestKey);
+            size--;
+        }
+        cache.put(key, value);
+        referenceCounter.put(key, 1);
+        size++;
+    }
 }
