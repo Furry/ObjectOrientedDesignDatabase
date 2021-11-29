@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/searchdata.css">
+    <link rel="icon" href="images/logopng.png" type="image/icon type">
+
+    <!-- JavaScript -->
+    <script src="js/setbutton.js"></script>
+    <script src="js/resetPage.js"></script>
+
+    <title>Search Data</title>
+</head>
+
+<body>
+    <div style="overflow:auto">
+        <div class="fixed-bg">
+            <br/><br/>
+            <div class="searchdata">
+                <h1 style="border-bottom: solid; border-color: #0F3655; padding-bottom: 2px; color: #0D304C;">db.jdb</h1>
+                <p style="color: #0F3655; font-size: x-large;">Search/set data here:</p><br/>
+
+                <div id="searchArea">
+                    <form>
+                        <div class="row">
+                            <div class="column">
+
+                                <p id="key" style="margin-bottom: 5px;"><strong>Key: </strong></p>
+                                <input class="field" type="text" id="txtName" placeholder="Enter a key to search/set"/>
+                                <br/>
+                    
+                                <p id="value" style="margin-bottom: 5px;"><strong>Value: </strong></p>
+                                <input class="field" type="text" onkeyup="success()" placeholder="Enter a value to set"/>
+                                <br/><br/><br/>
+
+                            </div>
+
+                            <div class="column">
+                                <br/>
+                                <p><input class="submit" id="find" type="submit" value="Find"/></p>
+                                <p><input class="submit" id="set" type="submit" value="Set" disabled/></p>
+                                <p><input class="submit" id="reset" type="reset" value="Reset" onClick="refreshPage()"/></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <br/>
+                <div id="outputArea">
+                    <div>
+                        <h3 style="color: #7A303D;">Key:</h3>
+                        <p style="font-size: x-large;">Info here</p>
+                    </div>
+
+                    <br/>
+
+                    <div>
+                        <h3 style="color: #7A303D;">Value:</h3>
+                        <p style="font-size: x-large;">Info here</p>
+                    </div>
+
+                    <br/>
+
+                    <div>
+                        <h3 style="color: #7A303D;">Line:</h3>
+                        <p style="font-size: x-large;">Info here</p>
+                    </div>
+                </div>
+            </div>
+            <br/><br/>
+            <div style="text-align: center;">
+                <a href="index.html">Go back to Home Page</a>
+            </div>
+            <br/><br/><br/>
+        </div>
+    </div>
+
+<!-- FOOTER STARTS HERE -->
+<div class="footer">
+    <h2>NCF OOD FINAL PROJECT</h2>
+    <h3>Nisanur Genc | Ender Fluegge</h3>
+</div>
+<!-- FOOTER ENDS HERE -->
+
+</body>
+</html>
