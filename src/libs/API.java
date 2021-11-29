@@ -158,7 +158,8 @@ public class API {
             URI uri = exchange.getRequestURI();
 
             // Check if file exists.
-            File file = new File(uri.getPath());
+            System.out.println(uri.getPath());
+            File file = new File("." + uri.getPath());
             if (!file.exists()) {
                 writeResponse(exchange, "File not found.");
             } else {
@@ -171,7 +172,6 @@ public class API {
                 }
                 writeResponse(exchange, body);
             }
-
         });
     }
 

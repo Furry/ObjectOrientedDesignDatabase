@@ -11,8 +11,8 @@
     <link rel="icon" href="https://i.imgur.com/GnKr3yJ.png" type="image/icon type">
 
     <!-- JavaScript -->
-    <script src="js/setbutton.js"></script>
-    <script src="js/resetPage.js"></script>
+    <script src="./js/setbutton.js" type="text/javascript"></script>
+    <script src="js/resetPage.js" type="text/javascript"></script>
 
     <title>Search Data</title>
 </head>
@@ -35,15 +35,15 @@
                                 <br/>
                     
                                 <p id="value" style="margin-bottom: 5px;"><strong>Value: </strong></p>
-                                <input class="field" type="text" onkeyup="success()" placeholder="Enter a value to set"/>
+                                <input class="field" type="text" id="valName" onkeyup="success()" placeholder="Enter a value to set"/>
                                 <br/><br/><br/>
 
                             </div>
 
                             <div class="column">
                                 <br/>
-                                <p><input class="submit" id="find" type="submit" value="Find"/></p>
-                                <p><input class="submit" id="set" type="submit" value="Set" disabled/></p>
+                                <p><input class="submit" id="find" type="button" value="Find" /></p>
+                                <p><input class="submit" id="set" type="button" value="Set" /></p>
                                 <p><input class="submit" id="reset" type="reset" value="Reset" onClick="refreshPage()"/></p>
                             </div>
                         </div>
@@ -53,21 +53,21 @@
                 <div id="outputArea">
                     <div>
                         <h3 style="color: #7A303D;">Key:</h3>
-                        <p style="font-size: x-large;">Info here</p>
+                        <p style="font-size: x-large;" id="keyInfo">Info here</p>
                     </div>
 
                     <br/>
 
                     <div>
                         <h3 style="color: #7A303D;">Value:</h3>
-                        <p style="font-size: x-large;">Info here</p>
+                        <p style="font-size: x-large;" id="valueInfo">Info here</p>
                     </div>
 
                     <br/>
 
                     <div>
                         <h3 style="color: #7A303D;">Line:</h3>
-                        <p style="font-size: x-large;">Info here</p>
+                        <p style="font-size: x-large;" id="lineInfo">Info here</p>
                     </div>
                 </div>
             </div>
