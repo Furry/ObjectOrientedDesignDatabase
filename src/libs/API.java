@@ -3,10 +3,14 @@ package libs;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 
 /**
@@ -32,6 +36,7 @@ public class API {
         set();
         dump();
         getLine();
+        getFile();
 
         // Start the server after everything's been initialized.
         this._server.start();
@@ -142,6 +147,31 @@ public class API {
                 System.out.println(e.getMessage());
                 writeResponse(exchange, "Internal Error");
             }
+        });
+    }
+
+    /**
+     * Get a file from the disk, and write it to the output stream.
+     */
+    private void getFile() {
+        _server.createContext("/", exchange -> {
+            URI uri = exchange.getRequestURI();
+
+            // Check if file exists.
+            File file = new File(uri.getPath());
+            if (!file.exists()) {
+                writeResponse(exchange, "File not found.");
+            } else {
+                String body = "";
+                try {
+                    // Read the file and write it to the output stream.
+                    body = new String(Files.readAllBytes(Paths.get(file.getPath())));
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+                writeResponse(exchange, body);
+            }
+
         });
     }
 
