@@ -2,9 +2,17 @@ package libs;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The ReadManager class handles all file reading. The reason this class exists is to allow for
+ * SmartTraversal™. The database file can get extremely large, and it is not feasible to read
+ * the entire file into memory. This class allows for the file to be read in a buffer.
+ *
+ * The position of the buffer is maintained by the ReadManager, and if given a key to read, it will restart
+ * the buffer at the beginning and search, stopping when it finds it, so it doesn't need to restart from the beginning
+ * for the next read.
+ */
 public class ReadManager {
     private final FileManager fileManager;
     private FileInputStream contentStream;
@@ -12,6 +20,11 @@ public class ReadManager {
     private int linePos = 1;
     private final int size;
 
+    /**
+     * The constructor for the ReadManager class.
+     * @param fileManager The FileManager instance that this ReadManager is associated with.
+     * @throws FileNotFoundException
+     */
     public ReadManager(FileManager fileManager) throws FileNotFoundException {
         this.fileManager = fileManager;
         this.contentStream = new FileInputStream(this.fileManager.file.getAbsolutePath());
@@ -19,6 +32,10 @@ public class ReadManager {
         this.size = countLines();
     }
 
+    /**
+     * Resets the stored scanner's position to the beginning of the file,
+     * re-declaring all variables within the class.
+     */
     private void resetScanner() {
         try {
             this.contentStream.close();
@@ -27,6 +44,10 @@ public class ReadManager {
         } catch (Exception ignored) {}
     }
 
+    /**
+     * Counts the number of lines in the file.
+     * @return The line count.
+     */
     public int countLines() {
         resetScanner();
         int lines = 0;
@@ -37,6 +58,11 @@ public class ReadManager {
         return lines;
     }
 
+    /**
+     * Dumps the contents of the file, concatenated into a single string
+     * separated by new lines per entry.
+     * @return
+     */
     public String dump() {
         resetScanner();
         StringBuilder builder = new StringBuilder();
@@ -46,11 +72,14 @@ public class ReadManager {
         return builder.toString();
     }
 
+    /**
+     * Read up to a specific line without resetting the scanner unless necessary.
+     * @param line The line to read up to.
+     * @return The contents of the line.
+     */
     public String readToLine(int line) {
         if (line > this.size) {
             resetScanner();
-//            System.out.println("Current line is " + this.linePos + " and you are trying to read to line " + line + " Max line is " + this.size);
-
         }
 
         if (linePos > line) {
@@ -75,6 +104,12 @@ public class ReadManager {
 //        return this.contentScanner.nextLine();
     }
 
+    /**
+     * Iterates over all entries in the database,
+     * returning the entry with the given associated key.
+     * @param key The key to search for.
+     * @return The entry with the given key.
+     */
     public String findByKey(String key) {
         resetScanner();
         while (this.contentScanner.hasNextLine()) {
