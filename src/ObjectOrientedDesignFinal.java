@@ -1,6 +1,7 @@
 import libs.API;
 import libs.FileManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 public class ObjectOrientedDesignFinal {
     public static void main(String[] args) throws Exception {
+        // If the file 'db.jdb' exists, delete it.
 //        API api = new API();
 
 //        FileManager fileManager = new FileManager("db.jdb");
@@ -20,7 +22,8 @@ public class ObjectOrientedDesignFinal {
 
 //        System.out.println(fileManager.file.length());
 
-        benchmarkWrite();
+        // Run a full benchmark on all line read, line write, and random key-read benchmarks.
+        fullBenchmark();
     }
 
     public static String hashString(String s) {
@@ -41,7 +44,12 @@ public class ObjectOrientedDesignFinal {
         return hash;
     }
 
-    public static void benchmarkWrite() throws Exception {
+    public static void fullBenchmark() throws Exception {
+
+        File file = new File("db.jdb");
+        if (file.exists()) {
+            file.delete();
+        }
 
         // Hash 1 to 9999, store the hash and number in a dictionary.
         Map<Integer, String> map = new HashMap<>();
