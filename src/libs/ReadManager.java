@@ -10,7 +10,7 @@ public class ReadManager {
     private FileInputStream contentStream;
     private Scanner contentScanner;
     private int linePos = 1;
-    private int size;
+    private final int size;
 
     public ReadManager(FileManager fileManager) throws FileNotFoundException {
         this.fileManager = fileManager;
@@ -37,9 +37,20 @@ public class ReadManager {
         return lines;
     }
 
+    public String dump() {
+        resetScanner();
+        StringBuilder builder = new StringBuilder();
+        while (this.contentScanner.hasNextLine()) {
+            builder.append(this.contentScanner.nextLine()).append("\n");
+        }
+        return builder.toString();
+    }
+
     public String readToLine(int line) {
         if (line > this.size) {
             resetScanner();
+//            System.out.println("Current line is " + this.linePos + " and you are trying to read to line " + line + " Max line is " + this.size);
+
         }
 
         if (linePos > line) {
@@ -57,8 +68,11 @@ public class ReadManager {
             linePos += 1;
         }
 
+        String nextLn = this.contentScanner.nextLine();
+//        System.out.println(nextLn);
+        return nextLn;
         // Return the next line and pray it's not null lol
-        return this.contentScanner.nextLine();
+//        return this.contentScanner.nextLine();
     }
 
     public String findByKey(String key) {

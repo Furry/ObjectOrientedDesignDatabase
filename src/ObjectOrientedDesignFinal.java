@@ -1,4 +1,5 @@
 import libs.API;
+import libs.Database;
 import libs.FileManager;
 
 import java.io.File;
@@ -10,9 +11,10 @@ import java.util.Map;
 public class ObjectOrientedDesignFinal {
     public static void main(String[] args) throws Exception {
         // If the file 'db.jdb' exists, delete it.
-//        API api = new API();
+        API api = new API();
 
 //        FileManager fileManager = new FileManager("db.jdb");
+//
 //        int pos = fileManager.writeManager.writeEntry("applebees", "chicken tortilla soup");
 //
 //        Thread.sleep(1000);
@@ -23,7 +25,8 @@ public class ObjectOrientedDesignFinal {
 //        System.out.println(fileManager.file.length());
 
         // Run a full benchmark on all line read, line write, and random key-read benchmarks.
-        fullBenchmark();
+        // fullBenchmark();
+
     }
 
     public static String hashString(String s) {
